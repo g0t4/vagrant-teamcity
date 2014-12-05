@@ -1,0 +1,19 @@
+#!/bin/bash
+
+apt-get -y update
+
+command -v java &>/dev/null || {
+	apt-get -y install default-jdk
+}
+
+
+# Download TeamCity if we don't already have it
+if [ ! -e /vagrant/TeamCity-8.1.5.tar.gz ]; then
+  curl -o /vagrant/TeamCity-8.1.5.tar.gz http://download-cf.jetbrains.com/teamcity/TeamCity-8.1.5.tar.gz
+fi
+# Extract TeamCity to /opt/TeamCity
+if [ ! -e /opt/TeamCity ]; then
+  tar -xf /vagrant/TeamCity-8.1.5.tar.gz --directory /opt/
+fi
+
+
